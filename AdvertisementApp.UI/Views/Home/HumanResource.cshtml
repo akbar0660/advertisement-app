@@ -1,0 +1,38 @@
+﻿@model List<AdvertisementListDto>
+<div class="dummy mt-5">
+
+</div>
+<div class="container my-3">
+    <div class="accordion" id="accordionExample">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading-@Model[i].Id">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@Model[i].Id" aria-expanded="@(i==0)" aria-controls="collapseOne">
+                        @Model[i].Title
+                    </button>
+                </h2>
+                <div id="collapse-@Model[i].Id" class="accordion-collapse collapse @(i==0?"show":"")" data-bs-parent="#accordionExample" aria-labelledby="heading-@Model[i].Id">
+                    <div class="accordion-body">
+                        @Html.Raw(Model[i].Description)
+
+                        <div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+
+                                <a asp-action="Apply" asp-controller="Advertisement" asp-route-advertisementId="@Model[i].Id">Apply</a>
+                            }
+                            else
+                            {
+                                <div class="alert alert-light text-center lead">
+                                    Sign in to apply jobs <a asp-action="SignIn" asp-controller="Account">Sign in</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div> 

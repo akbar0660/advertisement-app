@@ -1,0 +1,44 @@
+﻿@model UserCreateModel
+    <div class="container">
+        <form method="post" asp-action="SignUp" asp-controller="Account" class="form-check p-4 w-75 mx-auto">
+            <div class="form-control mb-3">
+                <label>Name : </label>
+                <input asp-for="@Model.FirstName" class="form-control" />
+            </div>
+            <div class="form-control mb-3">
+                <label>Surname : </label>
+                <input asp-for="@Model.Surname" class="form-control" />
+            </div>
+            <div class="form-control mb-3">
+                <label>Username : </label>
+                <input asp-for="@Model.Username" class="form-control" />
+            </div>
+            <div class="form-control mb-3"> 
+                <label>Phone Number : </label>
+                <input asp-for="@Model.PhoneNumber" class="form-control" /> 
+            </div>
+            <div class="form-control mb-3">
+                <select class="form-select" asp-for="GenderId">
+                    <option value="0">Select a sex</option>
+                    @foreach (var item in ViewBag.Gender)
+                    {
+                        <option value="@item.Id">@item.Definition</option>
+                    }
+                </select>
+            </div>
+            <div class="form-control mb-3">
+                <label>Password : </label>
+                <input type="password" asp-for="@Model.Password" class="form-control" />
+            </div>
+            <div class="form-control mb-3">
+                <label>Confirm Password : </label>
+                <input type="password" asp-for="@Model.ConfirmPassword" class="form-control" />
+            </div>
+            <div class="mb-3 form-control text-end">
+                <button type="submit" class="btn btn-primary">SignUp</button>
+            </div>
+            <div class="text-danger" asp-validation-summary="All">
+
+            </div>
+        </form>
+    </div>

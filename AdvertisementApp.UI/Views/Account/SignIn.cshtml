@@ -1,0 +1,24 @@
+﻿@model AppUserLoginDto
+<div class="container">
+    <form method="post" asp-action="SignIn" asp-controller="Account" class="form-check p-4 w-75 mx-auto">
+        <div class="form-control mb-3">
+            <label>Username : </label>
+            <input asp-for="@Model.Username" class="form-control" />
+        </div>
+        <div class="form-control mb-3">
+            <label>Password : </label>
+            <input type="password" asp-for="@Model.Password" class="form-control" />
+        </div>
+        <div class="mb-3 form-control text-end">
+            <button type="submit" class="btn btn-primary">SignIn</button>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" asp-for="@Model.RememberMe">
+            <label class="form-check-label" asp-for="@Model.RememberMe">
+                Remember Me 
+            </label>
+        </div>
+        <div class="text-danger" asp-validation-summary="All">
+        </div>
+    </form>
+</div>

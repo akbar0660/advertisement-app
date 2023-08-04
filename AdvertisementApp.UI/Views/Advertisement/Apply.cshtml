@@ -1,0 +1,70 @@
+﻿@model AdvertisementAppUserCreateModel
+
+<form class="w-75 mx-auto p-3" asp-action="Apply" asp-controller="Advertisement" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="@Model.AdvertisementId" />
+    <input type="hidden" asp-for="@Model.AppUserId" />
+    @if (ViewBag.GenderId == (int)GenderType.Male)
+    {
+        <div class="mb-3">
+            <label>Askerlik durumu</label>
+            <br />
+            <select onchange="setInputVisibility()" asp-for="@Model.MilitaryStatusId" class="form-select">
+                @foreach (var item in ViewBag.MilitaryStatuses)
+                {
+                    <option value="@item.Id">@item.Definition</option>
+                }
+            </select>
+        </div>
+
+        <div id="dateDiv" class="mb-3" style="display:none">
+            <label>Tecil tarihi</label>
+            <input type="date" asp-for="@Model.EndDate" class="form-control" />
+        </div>
+    }
+    else
+    {
+        <input type="hidden" asp-for="@Model.MilitaryStatusId" value="@((int)MilitaryStatusType.Muaf)" />
+    }
+
+    <div class="mb-3">
+        <label>Work experience (as years)</label>
+        <input type="number" asp-for="@Model.WorkExperience" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label> CV : </label>
+        <input type="file" asp-for="@Model.CvPath" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn-primary">Apply</button>
+    </div>
+
+    <div class="text-danger text-center" asp-validation-summary="All">
+
+
+
+    </div>
+
+</form>
+
+
+
+@section Scripts{
+    <script>
+        setInputVisibility();
+        function setInputVisibility() {
+            var selectedElement = document.getElementById("MilitaryStatusId");
+            var militaryStatusId = selectedElement.value;
+
+            var dateInput = document.getElementById("dateDiv");
+
+            if (militaryStatusId == 2) {
+                dateInput.style.display = "block";
+            } else {
+                dateInput.style.display = "none";
+            }
+
+        }
+    </script>
+}
